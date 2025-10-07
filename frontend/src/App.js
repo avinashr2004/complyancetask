@@ -9,7 +9,7 @@ function App() {
         scenario_name: 'Q4 Pilot Projection',
         monthly_invoice_volume: 2000,
         num_ap_staff: 3,
-        avg_hours_per_invoice: 0.17, 
+        avg_hours_per_invoice: 0.17,
         hourly_wage: 30,
         error_rate_manual: 0.5,
         error_cost: 100,
@@ -30,6 +30,7 @@ function App() {
     };
 
     const runSimulation = useCallback(async () => {
+        if (!inputs.monthly_invoice_volume) return;
         try {
             const response = await axios.post(`${API_URL}/simulate`, inputs);
             setResults(response.data);
@@ -63,6 +64,7 @@ function App() {
         }
     };
     
+    // --- Updated PDF Download Handler ---
     const handleDownloadReport = async (e) => {
         e.preventDefault();
         if (!email) {
@@ -72,13 +74,19 @@ function App() {
         try {
             const response = await axios.post(`${API_URL}/report/generate`, 
                 { email, scenario_data: { inputs, results } }, 
-                { responseType: 'blob' }
+                { responseType: 'blob' } // Receive the file as a blob
             );
 
-            const file = new Blob([response.data], { type: 'text/html' });
-            const fileURL = URL.createObjectURL(file);
-            window.open(fileURL, '_blank');
-            setStatusMessage('Report generated successfully!');
+            const fileURL = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = fileURL;
+            link.setAttribute('download', `ROI-Report-${inputs.scenario_name}.pdf`);
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode.removeChild(link);
+            window.URL.revokeObjectURL(fileURL);
+
+            setStatusMessage('Report downloaded successfully!');
         } catch (error) {
             console.error("Report generation error:", error);
             setStatusMessage('Failed to generate report.');

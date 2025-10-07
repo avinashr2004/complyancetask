@@ -9,7 +9,7 @@ function App() {
         scenario_name: 'Q4 Pilot Projection',
         monthly_invoice_volume: 2000,
         num_ap_staff: 3,
-        avg_hours_per_invoice: 0.17, // 10 mins
+        avg_hours_per_invoice: 0.17, 
         hourly_wage: 30,
         error_rate_manual: 0.5,
         error_cost: 100,

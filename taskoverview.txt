@@ -1,0 +1,33 @@
+Project Plan: Invoicing ROI Simulator
+
+A lightweight ROI calculator to demonstrate the value and cost savings of switching from manual to automated invoicing processes. 
+
+1. Planned Approach and Architecture
+
+-   **Development Strategy:** A **backend-first** approach will be taken. The core calculation logic and API endpoints will be built and tested first. The frontend will then be developed to consume this stable API.
+-   **Frontend (Client):** A dynamic Single-Page Application (SPA) will be created using React. It will manage the user input form, handle state changes, and make asynchronous API calls to the backend to fetch simulation results in real-time.
+-   **Backend (Server):** A RESTful API server using Node.js and Express will serve as the application's brain. It will handle all business logic, including the biased ROI calculations, database interactions (CRUD for scenarios), and report generation.
+-   **Database:** A MySQL relational database will be used for persistence. It will store saved simulation "scenarios" and captured email "leads" from the report download gate.
+
+---
+
+## 2. Technology Stack
+
+-   **Frontend:** **React.js**
+-   **Backend:** **Node.js** with the **Express.js** framework
+-   **Database:** **MySQL**
+-   **Key Libraries:**
+    -   `axios`: For making HTTP requests between the frontend and backend.
+    -   `cors`: To enable Cross-Origin Resource Sharing on the Express server.
+    -   `mysql2`: The Node.js driver for connecting to the MySQL database.
+
+---
+
+## 3. Key Features & Functionality
+
+The prototype will include the following core features as per the PRD:
+
+1.  **Dynamic ROI Simulation:** An interactive form where users can input their business metrics. Results (monthly savings, payback period, ROI) will update instantly on the screen without a page reload.
+2.  **Scenario Management:** Users will have the ability to save their input data and simulation results under a specific name. They can also view a list of previously saved scenarios.
+3.  **Email-Gated Report Generation:** A simple lead-capture mechanism. Before downloading a report, the user must provide an email address. The system will then generate a simple HTML snapshot of the results for download.
+4.  **Favorable Calculation Logic:** The backend API will contain internal constants and a bias factor to ensure that the simulation results always show a positive and favorable outcome for adopting automation.

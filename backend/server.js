@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
 const { body, validationResult } = require('express-validator');
-const PDFDocument = require('pdfkit'); // <-- For PDF generation
+const PDFDocument = require('pdfkit'); 
 
 const app = express();
 app.use(cors());
@@ -10,7 +10,6 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3001;
 
-// --- Internal Constants (Server-Side Only) ---
 const AUTOMATED_COST_PER_INVOICE = 0.20;
 const ERROR_RATE_AUTO = 0.001; // 0.1%
 const MIN_ROI_BOOST_FACTOR = 1.1;
@@ -19,7 +18,7 @@ const MIN_ROI_BOOST_FACTOR = 1.1;
 const dbPool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'Avimohana.04', // <-- IMPORTANT: Make sure this is your password
+    password: 'Avimohana.04', 
     database: 'roi_calculator'
 });
 
@@ -107,7 +106,7 @@ app.post(
 
         // Save the lead email
         try {
-    // This new command will insert or update, avoiding the duplicate error
+    //insert or update, avoiding the duplicate error
     await dbPool.execute(
         'INSERT INTO leads (email) VALUES (?) ON DUPLICATE KEY UPDATE created_at = NOW()', 
         [email]

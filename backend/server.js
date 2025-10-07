@@ -14,12 +14,21 @@ const AUTOMATED_COST_PER_INVOICE = 0.20;
 const ERROR_RATE_AUTO = 0.001; // 0.1%
 const MIN_ROI_BOOST_FACTOR = 1.1;
 
-// --- Database Connection ---
+// --- Database Connection localhost ---
+// const dbPool = mysql.createPool({
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'Avimohana.04', 
+//     database: 'roi_calculator'
+// });
+
+// --- Database Connection hosting ---
 const dbPool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'Avimohana.04', 
-    database: 'roi_calculator'
+    host: process.env.DB_HOST,       // Reads from Environment Variables
+    user: process.env.DB_USER,       // Reads from Environment Variables
+    password: process.env.DB_PASSWORD, // Reads from Environment Variables
+    database: process.env.DB_DATABASE, // Reads from Environment Variables
+    port: process.env.DB_PORT || 3306 // Reads from Environment Variables
 });
 
 // --- API Endpoints ---

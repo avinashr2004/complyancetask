@@ -142,7 +142,7 @@ function App() {
                     ) : (
                         <p>Loading results...</p>
                     )}
-                    
+                
                     <div className="actions">
                         <h3>Save & Download</h3>
                         <button onClick={handleSaveScenario} className="save-btn">Save This Scenario</button>
